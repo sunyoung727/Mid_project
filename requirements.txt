@@ -5,6 +5,4 @@ seaborn
 matplotlib.pyplot
 plotly.express
 koreanize_matplotlib
-folium
-requests
-json
+
