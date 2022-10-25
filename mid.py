@@ -56,14 +56,6 @@ mask = np.triu(np.ones_like(df[["인구", "주유소개수", "전기차수", "�
 sns.heatmap(df[["인구", "주유소개수", "전기차수", "충전소개수", "휘발유자동차수"]].corr(), annot=True, fmt=".2f", cmap="Greens", mask=mask)
 st.pyplot(fig)
 
-
-df_l = df[['longitude', 'latitude']]
-
-map_data = pd.DataFrame(
-    np.random.randn(25, 2) / [50, 50] + df_l,
-    columns=['longitude', 'latitude'])
-st.map(map_data)
-
 st.header("서울시 구별 전기차 수")
 ev_num_df = df[["구", "전기차수"]].sort_values("구").set_index("구")
 st.dataframe(ev_num_df)
@@ -76,10 +68,15 @@ pie = ax.pie(df["전기차수"],labels=ev_num_df.index,
             wedgeprops=wed,shadow=True)
 st.pyplot(fig)
 
-file_n = ("seoul.csv")
-place = pd.read_csv(file_name, encoding='cp949')
+st.header("한국전력공사 기준 전기차 충전소 시각화")
+file_name = ("seoul.csv")
+place = pd.read_csv(file_name)
 place_l = place[['longitude', 'latitude']]
 map_dt = pd.DataFrame(
-    np.random.randn(25, 2) / [50, 50] + place_l,
+    np.random.randn(631, 2) / [50, 50] + place_l,
     columns=['longitude', 'latitude'])
 st.map(map_dt)
+
+plt.figure(figsize=(10,10))
+mask = np.triu(np.ones_like(df.corr()))
+sns.heatmap(df.corr(), annot=True, fmt='.2f', cmap="Greens", mask=mask);
