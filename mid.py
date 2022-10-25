@@ -5,9 +5,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import koreanize_matplotlib
 import plotly.express as px
-import folium
-import requests
-import json
 
 file_name = ("final_data.csv")
 df = pd.read_csv(file_name, encoding='cp949')
